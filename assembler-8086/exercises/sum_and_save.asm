@@ -19,11 +19,9 @@
   ; Sum
   add ax, bx
 
-  ; If (overflow)
-  jc overflow
-  jmp end
+  ; If (not overflow)
+  jnc notOverflow
 
-  overflow:
   ; Save data 
   push di
   mov di, 0x0100
@@ -37,11 +35,10 @@
   add di, 2
   mov [di], si
   add di, 2
-  pop ax
-  mov [di], ax
+  pop [di]
 
   ; End
-  end:
+  notOverflow:
 
 .ports ; Port definition
 
